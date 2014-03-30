@@ -1130,7 +1130,6 @@ containing a value of this type.
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
         public static final int image=0x7f060027;
-        public static final int imageView1=0x7f060048;
         public static final int infoButton=0x7f060043;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
@@ -1147,8 +1146,9 @@ containing a value of this type.
         public static final int refresh_saved=0x7f060050;
         public static final int saveButton=0x7f060044;
         public static final int savedListView=0x7f060041;
-        public static final int saved_desc_textview=0x7f06004a;
-        public static final int saved_name_textview=0x7f060049;
+        public static final int saved_desc_textview=0x7f060049;
+        public static final int saved_name_textview=0x7f06004a;
+        public static final int saved_star_icon=0x7f060048;
         public static final int saved_time_textview=0x7f06003c;
         public static final int search_badge=0x7f060032;
         public static final int search_bar=0x7f060031;

@@ -1,33 +1,45 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:columnCount="2" >
+    android:layout_height="fill_parent" >
 
     <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="44dp"
-        android:layout_height="41dp"
-        android:layout_column="0"
-        android:layout_gravity="left|top"
-        android:layout_row="0"
+        android:id="@+id/saved_star_icon"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="7dp"
+        android:contentDescription="@string/hello_world"
         android:src="@drawable/lit_star" />
 
     <TextView
-        android:id="@+id/saved_name_textview"
-        android:layout_column="1"
-        android:layout_row="0"
-        android:text="TextView" />
+        android:id="@+id/saved_desc_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/saved_time_textview"
+        android:layout_below="@+id/saved_time_textview"
+        android:text="@string/hello_world" />
 
     <TextView
         android:id="@+id/saved_time_textview"
-        android:layout_column="1"
-        android:layout_row="1"
-        android:text="TextView" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/saved_name_textview"
+        android:layout_toRightOf="@+id/saved_star_icon"
+        android:text="@string/hello_world"
+        android:textColor="#4F49FF"
+        android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/saved_desc_textview"
-        android:layout_column="1"
-        android:layout_row="2"
-        android:text="TextView" />
-
-</GridLayout>
+        android:id="@+id/saved_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/saved_time_textview"
+        android:layout_alignParentTop="true"
+        android:text="@string/hello_world"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    
+</RelativeLayout>

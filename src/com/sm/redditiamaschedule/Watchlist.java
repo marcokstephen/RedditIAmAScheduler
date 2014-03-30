@@ -9,6 +9,7 @@ import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,16 +21,21 @@ public class Watchlist extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_watchlist);
+		//setContentView(R.layout.activity_watchlist);
 		
 		drawView();
 	}
 	
 	public void drawView(){
 		String[] persons = fileList();
-		TextView noticeTV = (TextView)findViewById(R.id.file_output);
+		ListView myListView = new ListView(this);
+		TextView noticeTV = new TextView(this);
+		//TextView noticeTV = (TextView)findViewById(R.id.file_output);
 		if (persons.length == 0){
 			noticeTV.setVisibility(View.VISIBLE);
+			noticeTV.setText("No saved AMAs!");
+			noticeTV.setGravity(Gravity.CENTER);
+			setContentView(noticeTV);
 		} else {
 			String[] outputStrings = new String[persons.length];
 			noticeTV.setVisibility(View.GONE);
@@ -54,9 +60,9 @@ public class Watchlist extends Activity {
 			}//end for loop
 			
 			SavedListAdapter adapter = new SavedListAdapter(outputStrings, Watchlist.this);
-			ListView savedLV = (ListView)findViewById(R.id.savedListView);
-			savedLV.setAdapter(adapter);
-			
+			//ListView savedLV = (ListView)findViewById(R.id.savedListView);
+			myListView.setAdapter(adapter);
+			setContentView(myListView);
 		}//end if length != 0
 	}
 	
@@ -77,7 +83,7 @@ public class Watchlist extends Activity {
 			clearSaved();
 			return true;
 		} else if (id == R.id.refresh_saved){
-			//drawView();
+			drawView();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -88,5 +94,6 @@ public class Watchlist extends Activity {
 		for (int i = 0; i < persons.length; i++){
 			deleteFile(persons[i]);
 		}
+		drawView();
 	}
 }

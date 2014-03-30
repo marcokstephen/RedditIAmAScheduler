@@ -303,15 +303,29 @@ public class MainActivity extends Activity {
 				
 				@Override
 				public void onClick(View v) {
-					String FILENAME = amaTitle;
+					String writeTitle = amaTitle;
+					String writeDate = amaDate;
+					String writeDesc = amaDescription;
+					if (writeTitle.equals("")){
+						writeTitle = "null";
+					}
+					if (writeDate.equals("")){
+						writeDate = "null";
+					}
+					if (writeDesc.equals("")){
+						writeDesc = "null";
+					}
+					
+					String FILENAME = writeTitle;
 					String NEWLINE = "PARSE";
+					
 					try {
 						FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-						fos.write(amaTitle.getBytes());
+						fos.write(writeTitle.getBytes());
 						fos.write(NEWLINE.getBytes());
-						fos.write(amaDate.getBytes());
+						fos.write(writeDate.getBytes());
 						fos.write(NEWLINE.getBytes());
-						fos.write(amaDescription.getBytes());
+						fos.write(writeDesc.getBytes());
 						fos.close();
 						
 						Context context = getApplicationContext();
