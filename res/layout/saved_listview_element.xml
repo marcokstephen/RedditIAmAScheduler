@@ -13,14 +13,17 @@
         android:layout_marginRight="7dp"
         android:contentDescription="@string/hello_world"
         android:src="@drawable/lit_star" />
-
+    
+    
     <TextView
-        android:id="@+id/saved_desc_textview"
+        android:id="@+id/saved_name_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/saved_time_textview"
-        android:layout_below="@+id/saved_time_textview"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:text="@string/hello_world"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/saved_time_textview"
@@ -31,15 +34,13 @@
         android:text="@string/hello_world"
         android:textColor="#4F49FF"
         android:textSize="12sp" />
-
+    
     <TextView
-        android:id="@+id/saved_name_textview"
+        android:id="@+id/saved_desc_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/saved_time_textview"
-        android:layout_alignParentTop="true"
-        android:text="@string/hello_world"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/saved_time_textview"
+        android:text="@string/hello_world" />
     
 </RelativeLayout>

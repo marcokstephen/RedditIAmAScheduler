@@ -15,5 +15,7 @@
     <string name="title_activity_watchlist">Saved</string>
     <string name="hello_world">Hello world!</string>
     <string name="nothing_saved">No items saved!</string>
+    <string name="get_more_info">Get More Info</string>
+    <string name="add_to_calendar">Add To Calendar</string>
 
 </resources>

@@ -6,26 +6,17 @@
         android:id="@+id/calendarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/infoButton"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/saveButton"
-        android:text="Add To Calendar" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/add_to_calendar" />
 
     <Button
         android:id="@+id/infoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/saveButton"
-        android:layout_alignRight="@+id/saveButton"
+        android:layout_alignLeft="@+id/calendarButton"
+        android:layout_alignRight="@+id/calendarButton"
         android:layout_below="@+id/calendarButton"
-        android:text="Get More Info" />
+        android:text="@string/get_more_info" />
 
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/infoButton"
-        android:layout_centerHorizontal="true"
-        android:text="Add To Watchlist" />
-    
 </RelativeLayout>

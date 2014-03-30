@@ -1,5 +1,10 @@
 package com.sm.redditiamaschedule;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,13 +47,6 @@ public class SavedListAdapter extends BaseAdapter {
 		TextView savedTime = (TextView)convertView.findViewById(R.id.saved_time_textview);
 		TextView savedDesc = (TextView)convertView.findViewById(R.id.saved_desc_textview);
 		final ImageView saveStar = (ImageView)convertView.findViewById(R.id.saved_star_icon);
-		final int currentPosition = position;
-		saveStar.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				saveStar.setImageResource(R.drawable.not_lit_star);
-			}
-		});
 		
 		String output = myList[position];
 		String[] oArray = output.split("PARSE");
@@ -63,6 +61,7 @@ public class SavedListAdapter extends BaseAdapter {
 			savedName.setVisibility(View.GONE);
 			savedTime.setVisibility(View.GONE);
 			savedDesc.setVisibility(View.GONE);
+			saveStar.setVisibility(View.GONE);
 		}
 		
 		if (oArray[1].equals("null")){
@@ -72,6 +71,54 @@ public class SavedListAdapter extends BaseAdapter {
 		if (oArray[2].equals("null")){
 			savedDesc.setVisibility(View.GONE);
 		}
+		
+		final String nameToDelete = oArray[0];
+		final String dateToDelete = oArray[1];
+		final String descToDelete = oArray[2];
+		saveStar.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				String[] files = context.fileList();
+				if (Arrays.asList(files).contains(nameToDelete))
+				{
+					saveStar.setImageResource(R.drawable.not_lit_star);
+					context.deleteFile(nameToDelete);
+				} else {
+					saveStar.setImageResource(R.drawable.lit_star);
+					try {
+						
+						final String NEWLINE = "PARSE";
+						String nameToWrite = nameToDelete;
+						String dateToWrite = dateToDelete;
+						String descToWrite = descToDelete;
+						if (nameToWrite.equals("")){
+							nameToWrite = "null";
+						}
+						if (dateToWrite.equals("")){
+							dateToWrite = "null";
+						}
+						if (descToWrite.equals("")){
+							descToWrite = "null";
+						}
+
+						FileOutputStream fos = context.openFileOutput(nameToWrite, Context.MODE_PRIVATE);
+						fos.write(nameToWrite.getBytes());
+						fos.write(NEWLINE.getBytes());
+						fos.write(dateToWrite.getBytes());
+						fos.write(NEWLINE.getBytes());
+						fos.write(descToWrite.getBytes());
+						fos.close();
+						
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		});
 
 		return convertView;
 	}	

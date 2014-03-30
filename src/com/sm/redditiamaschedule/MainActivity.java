@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import org.jsoup.Jsoup;
@@ -21,6 +22,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,11 +33,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.provider.CalendarContract;
-import android.provider.CalendarContract.Events;
 
 public class MainActivity extends Activity {
 	ArrayList<ExpandListGroup> list = new ArrayList<ExpandListGroup>();
@@ -146,6 +147,61 @@ public class MainActivity extends Activity {
 			TextView descTV = (TextView)convertView.findViewById(R.id.descriptionTextView);
 			dateTV.setText(group.getDate());
 			descTV.setText(group.getDescription());
+			
+			final ImageView starImage = (ImageView)convertView.findViewById(R.id.not_lit_star);
+			
+			String[] files = fileList();
+			if (Arrays.asList(files).contains(group.getName())){
+				starImage.setImageResource(R.drawable.lit_star);
+			} else {
+				starImage.setImageResource(R.drawable.not_lit_star);
+			}
+			
+			final String name = group.getName();
+			final String date = group.getDate();
+			final String desc = group.getDescription();
+			starImage.setOnClickListener(new View.OnClickListener ()
+			{
+				@Override
+				public void onClick(View v) {
+					String[] newFiles = fileList();
+					if (Arrays.asList(newFiles).contains(name)){
+						starImage.setImageResource(R.drawable.not_lit_star); //if it is saved, we delete it
+						deleteFile(name);
+					} else {
+						starImage.setImageResource(R.drawable.lit_star); //if it isnt saved, we add it
+						try {
+							
+							final String NEWLINE = "PARSE";
+							String nameToWrite = name;
+							String dateToWrite = date;
+							String descToWrite = desc;
+							if (nameToWrite.equals("")){
+								nameToWrite = "null";
+							}
+							if (dateToWrite.equals("")){
+								dateToWrite = "null";
+							}
+							if (descToWrite.equals("")){
+								descToWrite = "null";
+							}
+
+							FileOutputStream fos = openFileOutput(name, Context.MODE_PRIVATE);
+							fos.write(nameToWrite.getBytes());
+							fos.write(NEWLINE.getBytes());
+							fos.write(dateToWrite.getBytes());
+							fos.write(NEWLINE.getBytes());
+							fos.write(descToWrite.getBytes());
+							fos.close();
+							
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			});
 			
 			return convertView;
 		}
@@ -295,53 +351,7 @@ public class MainActivity extends Activity {
 					intent.setData(CalendarContract.Events.CONTENT_URI);
 					startActivity(intent);
 				}
-				
 			});
-			
-			Button saveButton = (Button)convertView.findViewById(R.id.saveButton);
-			saveButton.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					String writeTitle = amaTitle;
-					String writeDate = amaDate;
-					String writeDesc = amaDescription;
-					if (writeTitle.equals("")){
-						writeTitle = "null";
-					}
-					if (writeDate.equals("")){
-						writeDate = "null";
-					}
-					if (writeDesc.equals("")){
-						writeDesc = "null";
-					}
-					
-					String FILENAME = writeTitle;
-					String NEWLINE = "PARSE";
-					
-					try {
-						FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-						fos.write(writeTitle.getBytes());
-						fos.write(NEWLINE.getBytes());
-						fos.write(writeDate.getBytes());
-						fos.write(NEWLINE.getBytes());
-						fos.write(writeDesc.getBytes());
-						fos.close();
-						
-						Context context = getApplicationContext();
-						CharSequence text = "AMA Saved";
-						int duration = Toast.LENGTH_SHORT;
-						Toast toast = Toast.makeText(context, text, duration);
-						toast.show();
-						
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			});
-			
 			return convertView;
 		}
 

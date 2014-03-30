@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <TextView
+     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:paddingLeft="80px"
+        android:paddingLeft="30dp"
         android:text="TextView"
         android:textSize="18sp" />
 
@@ -18,15 +16,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#4F49FF"
-        android:paddingLeft="80px"
+        android:paddingLeft="30dp"
+        android:layout_below="@id/nameTextView"
         android:textSize="12sp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="wrap_content"
-        android:paddingLeft="80px"
+        android:paddingLeft="30dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/dateTextView"
         android:text="TextView" />
-
-</LinearLayout>
+    
+        <ImageView 
+        android:id="@+id/not_lit_star"
+        android:src="@drawable/not_lit_star"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="7dp"
+		android:layout_width="28dp"
+        android:layout_height="25dp"
+        />
+    
+</RelativeLayout>
