@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Reddit IAmA Scheduler</string>
+    <string name="app_name">Reddit IAmA Schedule</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="favorite">Watchlist</string>
+    <string name="help">Help</string>
+    <string name="title_activity_help">Help</string>
+    <string name="help_title"><B>Content not loading?</B></string>
+    <string name="help_answer">Make sure you are connected to the internet.\n\nThis app relies on information taken from Reddit. If moderators
+        change the formatting of data, this app is not guaranteed to return accurate results, or
+        even work at all.\n\nIf this is the case, send me an email at <a href="mailto:reddit@stephenmarcok.com">reddit@stephenmarcok.com</a> and
+        I will attempt to fix the issue as soon as possible.</string>
+    <string name="title_activity_watchlist">Saved</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="nothing_saved">No items saved!</string>
 
 </resources>

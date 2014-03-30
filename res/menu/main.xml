@@ -1,5 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.sm.redditiamascheduler.MainActivity" >
+    tools:context="com.sm.redditiamaschedule.MainActivity" >
 
+    <item
+        android:id="@+id/help_menu"
+        android:orderInCategory="100"
+        android:title="@string/help"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="99"
+        android:title="@string/action_settings"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/refresh_option"
+        android:orderInCategory="2"
+        android:title="@string/action_refresh" 
+        android:showAsAction="never" 
+        android:icon="@drawable/ic_action_refresh" />
+	 <item
+	    android:id="@+id/star_option"
+	    android:orderInCategory="1"
+	    android:title="@string/favorite"
+	    android:showAsAction="always"
+	    android:icon="@drawable/ic_action_important" />	
 </menu>
