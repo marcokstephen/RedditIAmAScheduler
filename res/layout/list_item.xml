@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:paddingLeft="30dp"
-        android:text="TextView"
+        android:text="@string/default_string"
         android:textSize="18sp" />
 
     <TextView
@@ -19,7 +19,7 @@
         android:paddingLeft="30dp"
         android:layout_below="@id/nameTextView"
         android:textSize="12sp"
-        android:text="TextView" />
+        android:text="@string/default_string" />
 
     <TextView
         android:id="@+id/descriptionTextView"
@@ -27,7 +27,7 @@
         android:paddingLeft="30dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/dateTextView"
-        android:text="TextView" />
+        android:text="@string/default_string" />
     
         <ImageView 
         android:id="@+id/not_lit_star"
@@ -38,6 +38,7 @@
         android:layout_marginRight="7dp"
 		android:layout_width="28dp"
         android:layout_height="25dp"
+        android:contentDescription="@string/star"
         />
     
 </RelativeLayout>

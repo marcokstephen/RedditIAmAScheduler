@@ -22,5 +22,9 @@
     <string name="select_your_time_zone">Select your time zone</string>
     <string name="twenty_four_hour_clock">24 Hour Clock</string>
     <string name="use_twenty_four_hour_clock">Use 24 hour clock</string>
+    <string name="default_string">Default String</string>
+    <string name="star">Favorite</string>
+    <string name="clear_all">Clear All</string>
+    <string name="refresh">Refresh</string>
 
 </resources>
