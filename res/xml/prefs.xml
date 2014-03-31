@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <CheckBoxPreference
-        android:title="24 Hour Clock"
+        android:title="@string/twenty_four_hour_clock"
         android:key="24hour"
         android:defaultValue="false"
-        android:summary="Use 24 hour clock">
+        android:summary="@string/use_twenty_four_hour_clock">
     </CheckBoxPreference>
     
-    <!--<ListPreference
-        android:title="Time Zone"
-        android:key="list"
-        android:summary="Select your time zone"
+    <ListPreference
+        android:title="@string/time_zone"
+        android:key="listTimeZone"
+        android:summary="@string/select_your_time_zone"
         android:entries="@array/list"
-        android:entryValues="@array/lvalues" >
-    </ListPreference>-->
+        android:entryValues="@array/lvalues"
+        android:defaultValue="0"
+        android:dialogTitle="@string/select_time_zone" >
+    </ListPreference>
         
 
 </PreferenceScreen>

@@ -17,11 +17,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.util.Log;
@@ -409,7 +411,11 @@ public class MainActivity extends Activity {
 						//if a user wishes to bookmark an AMA
 						name = name.replace("/"," - ");
 					}
+					
 					String combinedDate = date+", " + time;
+					combinedDate = modifyDate(combinedDate);
+					String[] newTimeArray = combinedDate.split(" ");
+					time = newTimeArray[2];
 					
 					group = new ExpandListGroup();
 					group.setDate(combinedDate);
@@ -487,5 +493,152 @@ public class MainActivity extends Activity {
     public void showStar(){
     	Intent intent = new Intent(this, Watchlist.class);
     	startActivity(intent);
+    }
+    
+    public String modifyDate(String date){
+    	String[] dateArray = date.split(" ");
+    	int day = Integer.parseInt(dateArray[0]);
+    	String month = dateArray[1];
+    	String time = dateArray[2];
+    	
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    	int timeZone = Integer.parseInt(prefs.getString("listTimeZone", "0"));
+    	int hour = 0;
+    	int minute = 0;
+
+    	if (time.charAt(1) == '0' || time.charAt(1) == '1' || time.charAt(1) == '2'){
+    		//time is a 2 digit number
+    		hour = Integer.parseInt(time.substring(0,2));
+    		if (time.charAt(2) == ':'){
+    			minute = 3;
+    		}
+    	} else {
+    		hour = Integer.parseInt(time.substring(0,1));
+    		if (time.charAt(1) == ':'){
+    			minute = 3;
+    		}
+    	}
+    	
+    	if (time.endsWith("pm") && hour < 12){
+    		hour += 12;
+    	}
+    	
+    	if (timeZone < 0){
+    		if (timeZone%2 != 0){
+    			minute += 3;
+    			hour--;
+    		}
+    		timeZone /= 2;
+    	} else {
+    		if (timeZone%2 != 0){
+    			minute += 3;
+    		}
+    		timeZone /= 2;
+    	}
+    	//implementing the timezone change
+    	hour = hour + timeZone;
+    	if (minute == 6){
+    		minute -= 6;
+    		hour++;
+    	}
+    	//we now have the initial values for hour and minute
+    	
+    	if (hour > 0){
+    		while (hour >= 24){
+    			hour -= 24;
+    			day++;
+    			
+    			if (day > 31 && month.startsWith("Jan")){
+    				day = 1;
+    				month = "Feb,";
+    			} else if (day > 28 && month.startsWith("Feb")){
+    				day = 1;
+    				month = "Mar,";
+    			} else if (day > 31 && month.startsWith("Mar")){
+    				day = 1;
+    				month = "Apr,";
+    			} else if (day > 30 && month.startsWith("Apr")){
+    				day = 1;
+    				month = "May,";
+    			} else if (day > 31 && month.startsWith("May")){
+    				day = 1;
+    				month = "June,";
+    			} else if (day > 30 && month.startsWith("Jun")){
+    				day = 1;
+    				month = "July,";
+    			} else if (day > 31 && month.startsWith("Jul")){
+    				day = 1;
+    				month = "Aug,";
+    			} else if (day > 31 && month.startsWith("Aug")){
+    				day = 1;
+    				month = "Sep,";
+    			} else if (day > 30 && month.startsWith("Sep")){
+    				day = 1;
+    				month = "Oct,";
+    			} else if (day > 31 && month.startsWith("Oct")){
+    				day = 1;
+    				month = "Nov,";
+    			} else if (day > 30 && month.startsWith("Nov")){
+    				day = 1;
+    				month = "Dec,";
+    			} else if (day > 31 && month.startsWith("Dec")){
+    				day = 1;
+    				month = "Jan,";
+    			}
+    		}
+    	} else {
+    		while (hour < 1){
+    			hour += 24;
+    			day--;
+    			if (day < 1 && month.startsWith("Jan")){
+    				day = 31;
+    				month = "Dec,";
+    			} else if (day < 1 && month.startsWith("Feb")){
+    				day = 31;
+    				month = "Jan,";
+    			} else if (day < 1 && month.startsWith("Mar")){
+    				day = 28;
+    				month = "Feb";
+    			} else if (day < 1 && month.startsWith("Apr")){
+    				day = 31;
+    				month = "Mar,";
+    			} else if (day < 1 && month.startsWith("May")){
+    				month = "Apr,";
+    				day = 30;
+    			} else if (day < 1 && month.startsWith("Jun")){
+    				month = "May,";
+    				day = 31;
+    			} else if (day < 1 && month.startsWith("Jul")){
+    				month = "Jun,";
+    				day = 30;
+    			} else if (day < 1 && month.startsWith("Aug")){
+    				month = "Jul,";
+    				day = 31;
+    			} else if (day < 1 && month.startsWith("Sep")){
+    				month = "Aug,";
+    				day = 31;
+    			} else if (day < 1 && month.startsWith("Oct")){
+    				month = "Sep,";
+    				day = 30;
+    			} else if (day < 1 && month.startsWith("Nov")){
+    				month = "Oct,";
+    				day = 31;
+    			} else if (day < 1 && month.startsWith("Dec")){
+    				month = "Nov,";
+    				day = 30;
+    			}
+    		}
+    	}
+    	
+    	if (hour >= 12){
+    		if (hour != 12) hour -= 12;
+    		date = day + " " + month + " " + hour + ":" + minute + "0pm";
+    	} else {
+    		if (hour == 0) hour = 12;
+    		date = day + " " + month + " " + hour + ":" + minute + "0am";
+    	}
+    	
+		return date;
+    	
     }
 }

@@ -17,5 +17,10 @@
     <string name="nothing_saved">No items saved!</string>
     <string name="get_more_info">Get More Info</string>
     <string name="add_to_calendar">Add To Calendar</string>
+    <string name="select_time_zone">Select Time Zone</string>
+    <string name="time_zone">Time Zone</string>
+    <string name="select_your_time_zone">Select your time zone</string>
+    <string name="twenty_four_hour_clock">24 Hour Clock</string>
+    <string name="use_twenty_four_hour_clock">Use 24 hour clock</string>
 
 </resources>

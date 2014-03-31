@@ -39,7 +39,7 @@
         <item>UTC+13:00</item>
         <item>UTC+14:00</item>
     </string-array>
-    <integer-array name="lvalues">
+    <string-array name="lvalues">
 		<item>-14</item>
 		<item>-12</item>
 		<item>-10</item>
@@ -77,5 +77,5 @@
 		<item>34</item>
 		<item>36</item>
 		<item>38</item>
-    </integer-array>
+    </string-array>
 </resources>
