@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			String date, time, name, desc, url;
-			
+			list.clear();
 			Log.d("Alert","Starting to parse data");
 			ExpandListGroup group = new ExpandListGroup();
 			ExpandListChild child = new ExpandListChild();
