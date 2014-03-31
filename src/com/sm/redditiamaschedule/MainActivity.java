@@ -137,7 +137,7 @@ public class MainActivity extends Activity {
 
 			ExpandListGroup group = (ExpandListGroup) getGroup(groupPosition);
 			if (convertView == null){
-				LayoutInflater inf = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				convertView = inf.inflate(R.layout.list_item, null);
 			}
 			TextView listItemTV = (TextView)convertView.findViewById(R.id.nameTextView);
@@ -212,7 +212,7 @@ public class MainActivity extends Activity {
 
 			ExpandListChild child = (ExpandListChild) getChild(groupPosition, childPosition);
 			if (convertView == null){
-				LayoutInflater inf = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				convertView = inf.inflate(R.layout.list_child, null);
 			}
 			final String url = child.getUrl();
@@ -401,6 +401,13 @@ public class MainActivity extends Activity {
 						url = infoLink.attr("abs:href").toString();
 					} else {
 						url = "null";
+					}
+
+					if (name.contains("/")){
+						//linux illegal filename character
+						//we use the name to save files
+						//if a user wishes to bookmark an AMA
+						name = name.replace("/"," - ");
 					}
 					String combinedDate = date+", " + time;
 					
