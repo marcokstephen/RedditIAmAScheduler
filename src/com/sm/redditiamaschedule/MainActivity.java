@@ -167,6 +167,7 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item){
     	switch (item.getItemId()){
     	case R.id.refresh_option:
+    		collapseAllGroup();
     		refresh();
     		break;
     	case R.id.help_menu:
@@ -182,6 +183,15 @@ public class MainActivity extends Activity {
     		break;
     	}
     	return true;
+    }
+    
+    public void collapseAllGroup(){
+		ExpandableListAdapter refresh = new ExpandableListAdapter(this, list);
+		int count = refresh.getGroupCount();
+		ExpandableListView elv = (ExpandableListView)findViewById(R.id.elv1);
+		for (int i = 0; i < count; i++){
+			elv.collapseGroup(i);
+		}
     }
     
     public void showHelp(){
